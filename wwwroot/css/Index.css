@@ -1,0 +1,189 @@
+﻿
+@font-face {
+  font-family: GothamBold;
+  src: url(../fonts/Website_Font.otf);
+}
+
+
+body {
+    margin: 0 0 0 0;
+    line-height: 1.5;
+    font-family: GothamBold;
+    color: silver;
+}
+
+h1 {
+    font-family: GothamBold
+}
+
+.page-holder {
+    min-height: 100vh;
+}
+
+.bg-cover {
+    background-image: url("../images/background-3.png");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center left;
+    background-size: cover;
+}
+
+.bgStormgrey {
+    background-color: #36474f;
+    background-repeat: no-repeat;
+}
+
+p {
+    font-family: GothamBold;
+    font-weight: bold;
+    padding: 100x 100px 100px 100px;
+    text-align: middle;
+}
+
+ class for the title 
+.title {
+    font-family:GothamBold;
+    text-align: center;
+    width: 60%;
+    margin: auto;
+    padding: top;
+}
+
+class for the subtitle
+.subtitle {
+    font-family: GothamBold;
+    text-align: center;
+    font-size: 16px;
+    width: 80%;
+    margin: auto;
+}
+
+class for the main text
+.main {
+    font-family: GothamBold;
+    text-align: center;
+    font-size: 22px;
+    width: 60%;
+    margin: auto;
+}
+
+
+
+.h_iframe iframe {
+    width: 100%;
+    height: 60%;
+    position: absolute;
+    left: 0%;
+}
+
+accessibility - show for screen readers, not visible users
+.show-for-sr {
+    font-family: GothamBold;
+    position: absolute !important;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    clip-path: inset(50%);
+    border: 0;
+}
+
+    .show-for-sr:focus {
+        padding: 15px 23px 14px;
+        width: auto;
+        width: auto;
+        clip: auto !important;
+        border-radius: 3px;
+    }
+
+.boxshadow {
+    -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+    box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+#wrapper {
+    min-height: 100%;
+    position: relative;
+}
+
+#content {
+    padding-bottom: 50px;
+     height of the footer element 
+}
+
+#footer {
+    height: 45px;
+    margin-top: -45px;
+}
+
+ center align text in committee cards 
+.card-body {
+    text-align: center;
+}
+
+ .card{
+     font-size: 16px
+ }
+
+.img {
+    width: 170px;
+    height: 280px;
+    object-fit: cover;
+    overflow: hidden;
+    cursor: pointer;
+    display: inline-block;
+}
+
+
+
+.incontainer {
+    padding-left: 8px;
+    padding-right: 8px;
+}
+
+
+.gameboxvalo {
+    /*display: inline-block;*/
+    /*width: 170px;*/
+    /*height: 280px;*/
+    margin-right: 8px;
+    margin-left: 8px;
+    margin-top: 8px;
+    margin-bottom: 8px;
+    border: 3px solid #222222;
+    overflow: hidden;
+    /*cursor: pointer;*/
+    background-image: url("../images/games/valorant.jpg");
+}
+
+
+
+/* Responsive layout - makes a two column-layout instead of four columns */
+@media screen and (max-width: 800px) {
+    .column {
+        -ms-flex: 50%;
+        flex: 50%;
+        max-width: 50%;
+    }
+}
+
+/* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+    .column {
+        -ms-flex: 100%;
+        flex: 100%;
+        max-width: 100%;
+    }
+}
+
+.table{
+    color:silver;
+}

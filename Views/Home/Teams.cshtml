@@ -1,0 +1,148 @@
+﻿@{
+    Layout = "/Views/Shared/_Layout.cshtml";
+}
+@{
+    ViewData["Title"] = "Teams";
+}
+<style>
+{
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial;
+}
+
+.header {
+  text-align: center;
+  padding: 32px;
+}
+
+.row {
+  display: -ms-flexbox; /* IE10 */
+  display: flex;
+  -ms-flex-wrap: wrap; /* IE10 */
+  flex-wrap: wrap;
+  padding: 0 4px;
+}
+
+/* Create four equal columns that sits next to each other */
+.column {
+    -ms-flex: 25%; /* IE10 */
+    flex: 25%;
+    max-width: 25%;
+    padding: 0 4px;
+    position: relative;
+    text-align: center;
+}
+
+.column img {
+  margin-top: 8px;
+  vertical-align: middle;
+  width: 100%;
+  border:solid;
+}
+
+.bottom-right {
+    position: absolute;
+    bottom: 2%;
+    right: 50%;
+}
+</style>
+
+<body>
+
+    <!-- Header -->
+    <div class="header">
+        <h1>Team Page</h1>
+        <p>All current teams we have to offer.</p>
+    </div>
+
+    <!-- Photo Grid -->
+    <div class="row">
+        <div class="column">
+            <a asp-area="Team" asp-controller="Valorant" asp-action="ValorantTeam" style="color:darkgrey">
+                <img src="~/images/games/valorant.jpg" style="width:100%; border:solid">
+            </a>
+            <div class="text-center align-text-bottom">Valorant</div>
+        </div>
+
+        <div class="column">
+            <a asp-area="Team" asp-controller="CSGO" asp-action="CSGOTeam" style="color:darkgrey">
+                <img src="~/images/games/csgo.jpg" style="width:100%; border:solid">
+            </a>
+            <div class="text-center align-text-bottom">CS:GO</div>
+        </div>
+
+        <div class="column">
+            <a asp-area="Team" asp-controller="RainbowSix" asp-action="RainbowSixTeam" style="color:darkgrey">
+                <img src="~/images/games/r6nomad.jpg" style="width:100%; border:solid">
+            </a>
+            <div class="text-center align-text-bottom">R6: Siege</div>
+        </div>
+
+        <div class="column">
+            <a asp-area="Team" asp-controller="RocketLeague" asp-action="RocketLeagueTeam" style="color:darkgrey">
+                <img src="~/images/games/rocketleague.jpg" style="width:100%; border:solid">
+            </a>
+            <div class="text-center align-text-bottom">Rocket League</div>
+        </div>
+
+        <div class="column">
+            <a asp-area="Team" asp-controller="LeagueOfLegends" asp-action="LoLTeam" style="color:darkgrey">
+                <img src="~/images/games/leagueoflegends.jpg" style="width:100%; border:solid">
+            </a>
+            <div class="text-center align-text-bottom">League Of Legends</div>
+        </div>
+
+
+    </div>
+
+</body>
+
+<!--<div class="card-deck" style="margin-top:15px">
+
+    <div class="card text-white">
+        <img src="~/images/games/valorant.jpg" class="card-img" alt="Valorant Image">-->
+@*<div class="card-img-overlay">
+        <p class="card-text">Valorant</p>
+    </div>*@
+<!--</div>
+
+
+    <div class="card bgStormgrey">
+        <img class="card-img" src="~/images/games/valorant.jpg" alt="Valorant Image">
+        <div class="card-img-overlay">
+            <h5 class="card-body align-text-bottom text-center">Valorant</h5>
+        </div>
+    </div>
+
+    <div class="card bgStormgrey">
+        <img class="card-img-top" src="~/images/games/csgo.jpg" alt="CSGO Image">
+        <div class="card-body">
+            <h5 class="card-title text-center">CS:GO</h5>
+        </div>
+    </div>
+
+    <div class="card bgStormgrey">
+        <img class="card-img-top" src="~/images/games/leagueoflegends.jpg" alt="League of Legends Image">
+        <div class="card-body">
+            <h5 class="card-title text-center">LoL</h5>
+        </div>
+    </div>
+
+    <div class="card bgStormgrey">
+        <img class="card-img-top" src="~/images/games/r6nomad.jpg" alt="R6 Siege Image">
+        <div class="card-body">
+            <h5 class="card-title text-center">R6 Siege</h5>
+        </div>
+    </div>
+
+    <div class="card">
+        <img class="card-img-top" src="~/images/games/rocketleague.jpg" alt="Rocket League Image">
+        <div class="card-body">
+            <h5 class="card-title text-center">Rocket League</h5>
+        </div>
+    </div>
+</div>-->

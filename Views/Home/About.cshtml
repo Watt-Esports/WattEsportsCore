@@ -1,0 +1,142 @@
+﻿@model WattEsportsCore.Models.ViewModels.CommitteeViewModel
+
+@{
+    ViewData["Title"] = "About Us";
+}
+
+
+<body>
+    <main>
+        <div id="content">
+            <br>
+            <div class="main">
+                <h1 class="text-center">Current Committee</h1>
+            </div>
+
+            <div class="row" id="ProductDiv">
+                <div class="card-deck">
+                @foreach (var committee in @Model.CommitteeList)
+                {
+                    <div class="card">
+                        @if (committee.ImageName == null)
+                        {
+                            <img class="card-img-top img-fluid rounded mb-3 img-thumbnail shadow-sm" style="height:250px; width:250px;" src="@("/images/teams/default_avatar.png")" alt="Card Image" />
+                        }
+                        else
+                        {
+                            <img class="card-img-top img-fluid rounded mb-3 img-thumbnail shadow-sm" style="height:250px; width:250px;" src="@("/images/committee/"+committee.ImageName)" alt="Card Image" />
+                        }
+                        <div class="card-body text-center">
+                            <h4 class="card-title">
+                                <a>@committee.Name</a>
+                            </h4>
+                            <h5>Role: @committee.Role</h5>
+                        </div>
+                    </div>
+                }
+                </div>
+            </div>
+
+            @* TODO *@
+            @* Want to try using class="lead" here to see if it makes it stand out more, maybe on home page as well*@
+            <br /><br />
+            <div class="main">
+                <p style="font-size: 30px"><b>Awards and Achievements:</b></p>
+            </div>
+            <div>
+                <table style="margin-left:auto;margin-right:10%;">
+                    <tr>
+                        <th style="text-align:right;">
+                            <p>NSE 2019 Final Standings</p>
+                            <p> 1st in Scotland</p>
+                            <p> 27th in the UK</p>
+                        </th>
+                        <th>
+                            <p>&emsp;&emsp;&emsp;&emsp;</p>
+                        </th>
+                        <th>
+                            <a href="https://nse.gg/">
+                                <span class="show-for-sr">NSE | National Student Esports</span>
+                                <img src="~/images/logos/NSEMini.png" width="100%" alt="NSE logo" />
+                            </a>
+                        </th>
+                    </tr>
+                </table>
+                <table style="margin-left:10%;">
+                    <tr>
+                        <th>
+                            <a href="https://thenuel.com/">
+                                <span class="show-for-sr">The NUEL</span>
+                                <img src="~/images/logos/theNuelMini.png" width="100%" alt="The NUEL logo" />
+                            </a>
+                        </th>
+                        <th>
+                            <p>&emsp;&emsp;&emsp;&emsp;</p>
+                        </th>
+                        <th>
+                            <p> NUEL Winter 2018</p>
+                            <p> 1st in the UK</p>
+                            <p> Hearthstone</p>
+                        </th>
+                        <th>
+                            <p>&emsp;&emsp;&emsp;&emsp;</p>
+                        </th>
+                    </tr>
+                </table>
+                <table style="margin-right:0px;margin-left:auto;margin-right:10%;">
+                    <tr>
+                        <th style="text-align:right;">
+                            <p>NSE Spring 2019</p>
+                            <p> 2nd in the UK</p>
+                            <p> Hearthstone</p>
+                        </th>
+                        <th>
+                            <p>&emsp;&emsp;&emsp;&emsp;</p>
+                        </th>
+                        <th>
+                            <a href="https://nse.gg/">
+                                <span class="show-for-sr">NSE | National Student Esports</span>
+                                <img src="~/images/logos/NSEMini.png" style="width:100%;" alt="NSE logo" />
+                            </a>
+                        </th>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+
+        <div class="main">
+            <p style="font-size: 30px"><b>Previous Committees:</b></p>
+        </div>
+
+        <div style="text-align:center;" class="main">
+            @*@foreach(var prevCommittee)*@
+            <p style="font-size:22px;"><b>October 2019:</b></p>
+            <p style="font-size:18px;"><b>President:</b> Shoto | Kyle</p>
+            <p style="font-size:18px;"><b>Vice President:</b> Mort | Isaac</p>
+            <p style="font-size:18px;"><b>Secretary:</b> kbourbery | Kieran</p>
+            <p style="font-size:18px;"><b>Treasurer:</b> Simber | Peter</p>
+            <br />
+            <p style="font-size:22px;"><b>March 2019:</b></p>
+            <p style="font-size:18px;"><b>President:</b> Shoto | Kyle</p>
+            <p style="font-size:18px;"><b>Vice President:</b> Mort | Isaac</p>
+            <p style="font-size:18px;"><b>Secretary:</b> WeeKappa | Colin</p>
+            <p style="font-size:18px;"><b>Treasurer:</b> A330Alex | Alex</p>
+            <br />
+            <p style="font-size:22px;"><b>January 2019:</b></p>
+            <p style="font-size:18px;"><b>President:</b> WeeKappa | Colin</p>
+            <p style="font-size:18px;"><b>Vice President:</b> Mort | Isaac</p>
+            <p style="font-size:18px;"><b>Secretary:</b> Shoto | Kyle</p>
+            <p style="font-size:18px;"><b>Treasurer:</b> Jacob | Goss</p>
+            <br />
+            <p style="font-size:22px;"><b>March 2018:</b></p>
+            <p style="font-size:18px;"><b>President:</b> Refinement | Billy</p>
+            <p style="font-size:18px;"><b>Vice President:</b> WeeKappa | Colin</p>
+            <p style="font-size:18px;"><b>Secretary:</b> Facade | James</p>
+            <p style="font-size:18px;"><b>Treasurer:</b> Chompski | Dom</p>
+
+        </div>
+        <br /> <br /> <br />
+
+    </main>
+</body>

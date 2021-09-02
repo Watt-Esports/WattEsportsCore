@@ -1,0 +1,56 @@
+﻿@model WattEsportsCore.Models.RainbowSix
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Create</h1>
+
+<h4>RainbowSix</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IGN" class="control-label"></label>
+                <input asp-for="IGN" class="form-control" />
+                <span asp-validation-for="IGN" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Rank" class="control-label"></label>
+                <input asp-for="Rank" class="form-control" />
+                <span asp-validation-for="Rank" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="InGameRole" class="control-label"></label>
+                <input asp-for="InGameRole" class="form-control" />
+                <span asp-validation-for="InGameRole" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SelectedTeamNumber" class="control-label"></label>
+                <select asp-for="SelectedTeamNumber" asp-items="Model.TeamNumberItems"></select>
+                <span asp-validation-for="SelectedTeamNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ImageFile" class="control-label"></label>
+                <input asp-for="ImageFile" accept="image/*" />
+                <span asp-validation-for="ImageFile" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

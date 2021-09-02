@@ -1,0 +1,155 @@
+﻿@model WattEsportsCore.Models.ViewModels.RainbowSixTeamsViewModel
+@{
+    ViewData["Title"] = "Rainbow Six Teams";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<body>
+    <main>
+        <div id="content">
+            <br>
+
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>TRIALS SOON!</strong> R6:Siege Trials are on 23rd September 2021. Join the discord to keep up-to date and find out more!
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <h1 class="display-3 text-center"> <img src="/images/logos/games/rainbowSix.png" alt="Rainbow Six Logo" height=220> </h1>
+
+            @if (Model.TeamOneList.Any())
+            {
+                <div class="main">
+                    <h1 class="text-center">Team 1</h1>
+                </div>
+            }
+            <div class="row" id="ProductDiv">
+                <div class="card-deck">
+                    @foreach (var player in @Model.TeamOneList)
+                    {
+                        <div class="card">
+                            @if (player.ImageName == null)
+                            {
+                                <img class="card-img-top img-fluid rounded mb-3 img-thumbnail shadow-sm" style="height:250px; width:250px;" src="@("/images/teams/default_avatar.png")" alt="Card Image" />
+                            }
+                            else
+                            {
+                                <img class="card-img-top img-fluid rounded mb-3 img-thumbnail shadow-sm" style="height:250px; width:250px;" src="@("/images/teams/rainbowsix/"+player.ImageName)" alt="Card Image" />
+                            }
+                            <div class="card-body text-center">
+                                <h4 class="card-title">
+                                    <a>@player.Name</a>
+                                </h4>
+                                <h5>IGN: @player.IGN</h5>
+                            </div>
+                            <div class="card-footer">
+                                <small class="text-muted">Team @player.SelectedTeamNumber</small>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+
+            @if (Model.TeamTwoList.Any())
+            {
+                <div class="main">
+                    <h1 class="text-center">Team 2</h1>
+                </div>
+            }
+            <div class="row" id="ProductDiv">
+                <div class="card-deck">
+                    @foreach (var player in @Model.TeamTwoList)
+                    {
+                        <div class="card">
+                            @if (player.ImageName != null)
+                            {
+                                <img class="card-img-top img-fluid rounded mb-3 img-thumbnail shadow-sm" style="height:250px; width:250px;" src="@("/images/teams/rainbowsix/"+player.ImageName)" alt="Card Image" />
+                            }
+                            @if (player.ImageName == null)
+                            {
+                                <img class="card-img-top img-fluid rounded mb-3 img-thumbnail shadow-sm" style="height:250px; width:250px;" src="@("/images/teams/default_avatar.png")" alt="Card Image" />
+                            }
+                            <div class="card-body text-center">
+                                <h4 class="card-title">
+                                    <a>@player.Name</a>
+                                </h4>
+                                <h5>IGN: @player.IGN</h5>
+                            </div>
+                            <div class="card-footer">
+                                <small class="text-muted">Team @player.SelectedTeamNumber</small>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+
+            @if (Model.TeamThreeList.Any())
+            {
+                <div class="main">
+                    <h1 class="text-center">Team 3</h1>
+                </div>
+            }
+            <div class="row" id="ProductDiv">
+                <div class="card-deck">
+                    @foreach (var player in @Model.TeamThreeList)
+                    {
+                        <div class="card">
+                            @if (player.ImageName != null)
+                            {
+                                <img class="card-img-top img-fluid rounded mb-3 img-thumbnail shadow-sm" style="height:250px; width:250px;" src="@("/images/teams/rainbowsix/"+player.ImageName)" alt="Card Image" />
+                            }
+                            @if (player.ImageName == null)
+                            {
+                                <img class="card-img-top img-fluid rounded mb-3 img-thumbnail shadow-sm" style="height:250px; width:250px;" src="@("/images/teams/default_avatar.png")" alt="Card Image" />
+                            }
+                            <div class="card-body text-center">
+                                <h4 class="card-title">
+                                    <a>@player.Name</a>
+                                </h4>
+                                <h5>IGN: @player.IGN</h5>
+                            </div>
+                            <div class="card-footer">
+                                <small class="text-muted">Team @player.SelectedTeamNumber</small>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+
+            @if (Model.TeamFourList.Any())
+            {
+                <div class="main">
+                    <h1 class="text-center">Team 4</h1>
+                </div>
+            }
+
+            <div class="row" id="ProductDiv">
+                <div class="card-deck">
+                    @foreach (var player in @Model.TeamFourList)
+                    {
+                        <div class="card">
+                            @if (player.ImageName != null)
+                            {
+                                <img class="card-img-top img-fluid rounded mb-3 img-thumbnail shadow-sm" style="height:250px; width:250px;" src="@("/images/teams/rainbowsix/"+player.ImageName)" alt="Card Image" />
+                            }
+                            @if (player.ImageName == null)
+                            {
+                                <img class="card-img-top img-fluid rounded mb-3 img-thumbnail shadow-sm" style="height:250px; width:250px;" src="@("/images/teams/default_avatar.png")" alt="Card Image" />
+                            }
+                            <div class="card-body text-center">
+                                <h4 class="card-title">
+                                    <a>@player.Name</a>
+                                </h4>
+                                <h5>IGN: @player.IGN</h5>
+                            </div>
+                            <div class="card-footer">
+                                <small class="text-muted">Team @player.SelectedTeamNumber</small>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </main>
+</body>

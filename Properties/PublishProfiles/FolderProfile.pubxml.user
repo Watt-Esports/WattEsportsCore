@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <_PublishTargetUrl>C:\Users\Upper\source\repos\WattEsportsCore\WattEsportsCore\bin\Debug\net5.0\publish\</_PublishTargetUrl>
+    <History>True|2021-08-31T12:51:12.4387109Z;True|2021-08-31T10:31:26.5721863+01:00;True|2021-08-30T17:08:03.8763807+01:00;True|2021-08-30T16:10:46.5048946+01:00;True|2021-08-21T13:08:20.5797736+01:00;True|2021-08-21T11:40:39.4499226+01:00;True|2021-08-20T15:14:47.7088775+01:00;True|2021-08-19T14:14:09.8748283+01:00;True|2021-08-19T14:12:26.8223495+01:00;True|2021-08-19T13:58:40.3549861+01:00;True|2021-08-19T13:56:51.4047614+01:00;True|2021-08-19T12:59:25.0642754+01:00;True|2021-08-19T12:58:08.4677013+01:00;True|2021-08-18T12:44:35.5169758+01:00;True|2021-08-18T10:20:21.7596407+01:00;</History>
+  </PropertyGroup>
+</Project>

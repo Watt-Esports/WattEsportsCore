@@ -1,0 +1,11 @@
+
+bin/*
+obj/*
+Data/DummyData.cs
+appsettings.Development.json
+appsettings.json
+.config/dotnet-tools.json
+.vs/slnx.sqlite
+Migrations/*
+WattEsportsCore.csproj
+WattEsportsCore.csproj.user
