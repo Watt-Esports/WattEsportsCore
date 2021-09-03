@@ -9,3 +9,6 @@ appsettings.json
 Migrations/*
 WattEsportsCore.csproj
 WattEsportsCore.csproj.user
+.vs/*
+WattEsportsCore.sln
+Properties/PublishProfiles/FolderProfile.pubxml.user

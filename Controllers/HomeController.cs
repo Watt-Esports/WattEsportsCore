@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using RestSharp;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -58,6 +59,7 @@ namespace WattEsportsCore.Controllers
 
             return View(model);
         }
+
 
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
