@@ -28,7 +28,7 @@
                 <div class="card-deck">
                     @foreach (var player in @Model.TeamOneList)
                     {
-                        <div class="card">
+                        <div class="card bg-transparent border-light">
                             @if (player.ImageName == null)
                             {
                                 <img class="card-img-top img-fluid rounded mb-3 img-thumbnail shadow-sm" style="height:250px; width:250px;" src="@("/images/teams/default_avatar.png")" alt="Card Image" />
@@ -43,7 +43,7 @@
                                 </h4>
                                 <h5>IGN: @player.IGN</h5>
                             </div>
-                            <div class="card-footer">
+                            <div class="card-footer text-center">
                                 <small class="text-muted">Team @player.SelectedTeamNumber</small>
                             </div>
                         </div>
@@ -61,7 +61,7 @@
                 <div class="card-deck">
                     @foreach (var player in @Model.TeamTwoList)
                     {
-                        <div class="card">
+                        <div class="card bg-transparent border-light">
                             @if (player.ImageName != null)
                             {
                                 <img class="card-img-top img-fluid rounded mb-3 img-thumbnail shadow-sm" style="height:250px; width:250px;" src="@("/images/teams/rainbowsix/"+player.ImageName)" alt="Card Image" />
@@ -76,7 +76,7 @@
                                 </h4>
                                 <h5>IGN: @player.IGN</h5>
                             </div>
-                            <div class="card-footer">
+                            <div class="card-footer text-center">
                                 <small class="text-muted">Team @player.SelectedTeamNumber</small>
                             </div>
                         </div>
@@ -94,7 +94,7 @@
                 <div class="card-deck">
                     @foreach (var player in @Model.TeamThreeList)
                     {
-                        <div class="card">
+                        <div class="card bg-transparent border-light">
                             @if (player.ImageName != null)
                             {
                                 <img class="card-img-top img-fluid rounded mb-3 img-thumbnail shadow-sm" style="height:250px; width:250px;" src="@("/images/teams/rainbowsix/"+player.ImageName)" alt="Card Image" />
@@ -109,7 +109,7 @@
                                 </h4>
                                 <h5>IGN: @player.IGN</h5>
                             </div>
-                            <div class="card-footer">
+                            <div class="card-footer text-center">
                                 <small class="text-muted">Team @player.SelectedTeamNumber</small>
                             </div>
                         </div>
@@ -128,7 +128,7 @@
                 <div class="card-deck">
                     @foreach (var player in @Model.TeamFourList)
                     {
-                        <div class="card">
+                        <div class="card bg-transparent border-light">
                             @if (player.ImageName != null)
                             {
                                 <img class="card-img-top img-fluid rounded mb-3 img-thumbnail shadow-sm" style="height:250px; width:250px;" src="@("/images/teams/rainbowsix/"+player.ImageName)" alt="Card Image" />
@@ -143,7 +143,7 @@
                                 </h4>
                                 <h5>IGN: @player.IGN</h5>
                             </div>
-                            <div class="card-footer">
+                            <div class="card-footer text-center">
                                 <small class="text-muted">Team @player.SelectedTeamNumber</small>
                             </div>
                         </div>
