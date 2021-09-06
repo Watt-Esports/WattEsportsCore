@@ -1,4 +1,6 @@
-﻿@model IEnumerable<WattEsportsCore.Models.Committee>
+﻿@using Microsoft.AspNetCore.Hosting
+@using System.IO
+@model IEnumerable<WattEsportsCore.Models.Committee>
 
 @{
     ViewData["Title"] = "Index";
@@ -10,7 +12,8 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
-<table class="table">
+
+<table class="table text-light">
     <thead>
         <tr>
             <th>
@@ -26,9 +29,10 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+    @foreach (var item in Model)
+    {
         <tr>
-            <td>
+            <td class="text-light">
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
             <td>
@@ -43,6 +47,6 @@
                 <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
             </td>
         </tr>
-}
+    }
     </tbody>
 </table>

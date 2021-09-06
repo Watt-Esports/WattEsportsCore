@@ -57,12 +57,14 @@ namespace WattEsportsCore.Areas.GameLead.Controllers
         // GET: GameLead/Counterstrikes/Create
         public IActionResult Create()
         {
+
+            string webhost = _hostEnvironment.WebRootPath;
             Counterstrike model = new Counterstrike
             {
                 TeamNumberItems = new List<SelectListItem>
                                     {
 
-            new SelectListItem { Value = "1", Text = "Team 1" },
+            new SelectListItem { Value = "1", Text = webhost },
 
             new SelectListItem { Value = "2", Text = "Team 2" },
 
@@ -84,19 +86,28 @@ namespace WattEsportsCore.Areas.GameLead.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (counterstrike.ImageFile != null)
+                try
                 {
-                    //Save image to wwwroot/image
-                    string wwwRootPath = _hostEnvironment.WebRootPath;
-                    string fileName = Path.GetFileNameWithoutExtension(counterstrike.ImageFile.FileName);
-                    string extension = Path.GetExtension(counterstrike.ImageFile.FileName);
-                    counterstrike.ImageName = fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
-                    string path = Path.Combine(wwwRootPath + "/images/teams/counterstrike/", fileName);
-                    using (var fileStream = new FileStream(path, FileMode.Create))
+                    if (counterstrike.ImageFile != null)
                     {
-                        await counterstrike.ImageFile.CopyToAsync(fileStream);
+                        //Save image to wwwroot/image
+                        string wwwRootPath = _hostEnvironment.WebRootPath;
+                        string fileName = Path.GetFileNameWithoutExtension(counterstrike.ImageFile.FileName);
+                        string extension = Path.GetExtension(counterstrike.ImageFile.FileName);
+                        counterstrike.ImageName = fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
+                        string path = Path.Combine(wwwRootPath + "/images/teams/counterstrike/", fileName);
+                        using (var fileStream = new FileStream(path, FileMode.Create))
+                        {
+                            await counterstrike.ImageFile.CopyToAsync(fileStream);
+                        }
                     }
                 }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                    throw;
+                }
+   
 
                 _context.Add(counterstrike);
                 await _context.SaveChangesAsync();

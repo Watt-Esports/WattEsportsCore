@@ -17,7 +17,7 @@
                 <div class="card-deck">
                 @foreach (var committee in @Model.CommitteeList)
                 {
-                    <div class="card">
+                    <div class="card bg-transparent border-light">
                         @if (committee.ImageName == null)
                         {
                             <img class="card-img-top img-fluid rounded mb-3 img-thumbnail shadow-sm" style="height:250px; width:250px;" src="@("/images/teams/default_avatar.png")" alt="Card Image" />
@@ -57,7 +57,7 @@
                         <th>
                             <a href="https://nse.gg/">
                                 <span class="show-for-sr">NSE | National Student Esports</span>
-                                <img src="~/images/logos/NSEMini.png" width="100%" alt="NSE logo" />
+                                <img src="/images/logos/NSEMini.png" width="100%" alt="NSE logo" />
                             </a>
                         </th>
                     </tr>
@@ -67,7 +67,7 @@
                         <th>
                             <a href="https://thenuel.com/">
                                 <span class="show-for-sr">The NUEL</span>
-                                <img src="~/images/logos/theNuelMini.png" width="100%" alt="The NUEL logo" />
+                                <img src="/images/logos/theNuelMini.png" width="100%" alt="The NUEL logo" />
                             </a>
                         </th>
                         <th>
@@ -96,7 +96,7 @@
                         <th>
                             <a href="https://nse.gg/">
                                 <span class="show-for-sr">NSE | National Student Esports</span>
-                                <img src="~/images/logos/NSEMini.png" style="width:100%;" alt="NSE logo" />
+                                <img src="/images/logos/NSEMini.png" style="width:100%;" alt="NSE logo" />
                             </a>
                         </th>
                     </tr>

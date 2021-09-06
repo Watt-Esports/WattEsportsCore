@@ -153,6 +153,7 @@ namespace WattEsportsCore
                 {
                     ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
                 });
+
                 //DummyData.Initialize(_context, _userManager, _roleManager).Wait();
 
             });

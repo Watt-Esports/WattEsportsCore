@@ -74,11 +74,9 @@ namespace WattEsportsCore.Areas.Admin.Controllers
                     string fileName = Path.GetFileNameWithoutExtension(committee.ImageFile.FileName);
                     string extension = Path.GetExtension(committee.ImageFile.FileName);
                     committee.ImageName = fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
-                    string path = Path.Combine(wwwRootPath + "/images/committee", fileName);
-                    using (var fileStream = new FileStream(path, FileMode.Create))
-                    {
-                        await committee.ImageFile.CopyToAsync(fileStream);
-                    }
+                    string path = Path.Combine(wwwRootPath + "/images/committee/", fileName);
+                    using var fileStream = new FileStream(path, FileMode.Create);
+                    await committee.ImageFile.CopyToAsync(fileStream);
                 }
 
                 _context.Add(committee);
@@ -123,7 +121,7 @@ namespace WattEsportsCore.Areas.Admin.Controllers
                     if(committee.ImageName != null) // We delete it as it's not our default placeholder 
                     {
                         //delete image from wwwroot/image
-                        var imagePath = Path.Combine(_hostEnvironment.WebRootPath, "images/committee/", committee.ImageName);
+                        var imagePath = Path.Combine(_hostEnvironment.WebRootPath, "/images/committee/", committee.ImageName);
                         if (System.IO.File.Exists(imagePath))
                             System.IO.File.Delete(imagePath);
 
@@ -133,7 +131,7 @@ namespace WattEsportsCore.Areas.Admin.Controllers
                         string fileName = Path.GetFileNameWithoutExtension(committee.ImageFile.FileName);
                         string extension = Path.GetExtension(committee.ImageFile.FileName);
                         committee.ImageName = fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
-                        string path = Path.Combine(wwwRootPath + "/images/committee", fileName);
+                        string path = Path.Combine(wwwRootPath + "/images/committee/", fileName);
                         using (var fileStream = new FileStream(path, FileMode.Create))
                         {
                             await committee.ImageFile.CopyToAsync(fileStream);
@@ -146,7 +144,7 @@ namespace WattEsportsCore.Areas.Admin.Controllers
                         string fileName = Path.GetFileNameWithoutExtension(committee.ImageFile.FileName);
                         string extension = Path.GetExtension(committee.ImageFile.FileName);
                         committee.ImageName = fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
-                        string path = Path.Combine(wwwRootPath + "/images/committee", fileName);
+                        string path = Path.Combine(wwwRootPath + "/images/committee/", fileName);
                         using (var fileStream = new FileStream(path, FileMode.Create))
                         {
                             await committee.ImageFile.CopyToAsync(fileStream);

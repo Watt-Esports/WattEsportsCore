@@ -30,7 +30,7 @@
             @Html.DisplayFor(model => model.ImageName)
         </dd>
         <dd class="col-sm-10">
-            <img src="@("~/images/"+Model.ImageName)" asp-append-version="true" width="250px" height="250px" />
+            <img src="@("/images/"+Model.ImageName)" asp-append-version="true" width="250px" height="250px" />
         </dd>
     </dl>
 </div>
