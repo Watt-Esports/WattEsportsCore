@@ -1,5 +1,3 @@
-using System;
-
 namespace WattEsportsCore.Models
 {
     public class ErrorViewModel
