@@ -26,6 +26,8 @@ namespace WattEsportsCore.Data
         public DbSet<LeagueOfLegends> LeagueOfLegends { get; set; }
         public DbSet<RainbowSix> RainbowSixs { get; set; }
         public DbSet<RocketLeague> RocketLeagues { get; set; }
+        public DbSet<Hearthstone> Hearthstones { get; set; }
+
 
     }
 }

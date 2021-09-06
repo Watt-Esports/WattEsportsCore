@@ -1,18 +1,19 @@
-﻿@model WattEsportsCore.Models.RocketLeague
+﻿@model WattEsportsCore.Models.Hearthstone
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Edit";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Create</h1>
+<h1>Edit</h1>
 
-<h4>RocketLeague</h4>
+<h4>Hearthstone</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create" enctype="multipart/form-data">
+        <form asp-action="Edit" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
             <div class="form-group">
                 <label asp-for="Name" class="control-label"></label>
                 <input asp-for="Name" class="form-control" />
@@ -43,8 +44,18 @@
                 <input asp-for="ImageFile" accept="image/*" />
                 <span asp-validation-for="ImageFile" class="text-danger"></span>
             </div>
+            <div>
+                @if (Model.ImageName == null)
+                {
+                    <img class="img-fluid rounded mb-3 img-thumbnail shadow-sm" style="height: 250px; width: 250px;" src="@("/images/teams/default_avatar.png")" alt="Card Image" />
+                }
+                else
+                {
+                    <img class="img-fluid rounded mb-3 img-thumbnail shadow-sm" style="height: 250px; width: 250px;" src="@("/images/teams/hearthstone/" + Model.ImageName)" alt="Card Image" />
+                }
+            </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </form>
     </div>
