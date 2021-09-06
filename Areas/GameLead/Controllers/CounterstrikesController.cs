@@ -57,14 +57,12 @@ namespace WattEsportsCore.Areas.GameLead.Controllers
         // GET: GameLead/Counterstrikes/Create
         public IActionResult Create()
         {
-
-            string webhost = _hostEnvironment.WebRootPath;
             Counterstrike model = new Counterstrike
             {
                 TeamNumberItems = new List<SelectListItem>
                                     {
 
-            new SelectListItem { Value = "1", Text = webhost },
+            new SelectListItem { Value = "1", Text = "Team 1" },
 
             new SelectListItem { Value = "2", Text = "Team 2" },
 
@@ -129,6 +127,20 @@ namespace WattEsportsCore.Areas.GameLead.Controllers
             {
                 return NotFound();
             }
+
+            counterstrike.TeamNumberItems = new List<SelectListItem>
+            {
+
+                new SelectListItem {Value = "1", Text = "Team 1"},
+
+                new SelectListItem {Value = "2", Text = "Team 2"},
+
+                new SelectListItem {Value = "3", Text = "Team 3"},
+
+                new SelectListItem {Value = "4", Text = "Team 4"},
+            };
+
+
             return View(counterstrike);
         }
 
@@ -137,7 +149,7 @@ namespace WattEsportsCore.Areas.GameLead.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,IGN,Rank,InGameRole,SelectedTeamNumber,ImageName")] Counterstrike counterstrike)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,IGN,Rank,InGameRole,SelectedTeamNumber,ImageFile")] Counterstrike counterstrike)
         {
             if (id != counterstrike.Id)
             {
@@ -148,6 +160,39 @@ namespace WattEsportsCore.Areas.GameLead.Controllers
             {
                 try
                 {
+                    if (counterstrike.ImageName != null) // We delete it as it's not our default placeholder 
+                    {
+                        //delete image from wwwroot/image
+                        var imagePath = Path.Combine(_hostEnvironment.WebRootPath, "/images/counterstrike/", counterstrike.ImageName);
+                        if (System.IO.File.Exists(imagePath))
+                            System.IO.File.Delete(imagePath);
+
+
+                        //Save image to wwwroot/image
+                        string wwwRootPath = _hostEnvironment.WebRootPath;
+                        string fileName = Path.GetFileNameWithoutExtension(counterstrike.ImageFile.FileName);
+                        string extension = Path.GetExtension(counterstrike.ImageFile.FileName);
+                        counterstrike.ImageName = fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
+                        string path = Path.Combine(wwwRootPath + "/images/teams/counterstrike/", fileName);
+                        using (var fileStream = new FileStream(path, FileMode.Create))
+                        {
+                            await counterstrike.ImageFile.CopyToAsync(fileStream);
+                        }
+                    }
+                    else if (counterstrike.ImageFile != null) // We are not saving the default image again woo
+                    {
+                        //Save image to wwwroot/image
+                        string wwwRootPath = _hostEnvironment.WebRootPath;
+                        string fileName = Path.GetFileNameWithoutExtension(counterstrike.ImageFile.FileName);
+                        string extension = Path.GetExtension(counterstrike.ImageFile.FileName);
+                        counterstrike.ImageName = fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
+                        string path = Path.Combine(wwwRootPath + "/images/teams/counterstrike/", fileName);
+                        using (var fileStream = new FileStream(path, FileMode.Create))
+                        {
+                            await counterstrike.ImageFile.CopyToAsync(fileStream);
+                        }
+                    }
+
                     _context.Update(counterstrike);
                     await _context.SaveChangesAsync();
                 }

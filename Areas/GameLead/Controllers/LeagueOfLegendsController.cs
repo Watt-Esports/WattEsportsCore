@@ -118,6 +118,20 @@ namespace WattEsportsCore.Areas.GameLead.Controllers
             {
                 return NotFound();
             }
+
+            leagueOfLegends.TeamNumberItems = new List<SelectListItem>
+            {
+
+                new SelectListItem {Value = "1", Text = "Team 1"},
+
+                new SelectListItem {Value = "2", Text = "Team 2"},
+
+                new SelectListItem {Value = "3", Text = "Team 3"},
+
+                new SelectListItem {Value = "4", Text = "Team 4"},
+            };
+
+
             return View(leagueOfLegends);
         }
 
@@ -126,7 +140,7 @@ namespace WattEsportsCore.Areas.GameLead.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,IGN,Rank,InGameRole,SelectedTeamNumber,ImageName")] LeagueOfLegends leagueOfLegends)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,IGN,Rank,InGameRole,SelectedTeamNumber,ImageFile")] LeagueOfLegends leagueOfLegends)
         {
             if (id != leagueOfLegends.Id)
             {
@@ -137,6 +151,40 @@ namespace WattEsportsCore.Areas.GameLead.Controllers
             {
                 try
                 {
+
+                    if (leagueOfLegends.ImageName != null) // We delete it as it's not our default placeholder 
+                    {
+                        //delete image from wwwroot/image
+                        var imagePath = Path.Combine(_hostEnvironment.WebRootPath, "/images/leagueoflegends/", leagueOfLegends.ImageName);
+                        if (System.IO.File.Exists(imagePath))
+                            System.IO.File.Delete(imagePath);
+
+
+                        //Save image to wwwroot/image
+                        string wwwRootPath = _hostEnvironment.WebRootPath;
+                        string fileName = Path.GetFileNameWithoutExtension(leagueOfLegends.ImageFile.FileName);
+                        string extension = Path.GetExtension(leagueOfLegends.ImageFile.FileName);
+                        leagueOfLegends.ImageName = fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
+                        string path = Path.Combine(wwwRootPath + "/images/teams/leagueoflegends/", fileName);
+                        using (var fileStream = new FileStream(path, FileMode.Create))
+                        {
+                            await leagueOfLegends.ImageFile.CopyToAsync(fileStream);
+                        }
+                    }
+                    else if (leagueOfLegends.ImageFile != null) // We are not saving the default image again woo
+                    {
+                        //Save image to wwwroot/image
+                        string wwwRootPath = _hostEnvironment.WebRootPath;
+                        string fileName = Path.GetFileNameWithoutExtension(leagueOfLegends.ImageFile.FileName);
+                        string extension = Path.GetExtension(leagueOfLegends.ImageFile.FileName);
+                        leagueOfLegends.ImageName = fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
+                        string path = Path.Combine(wwwRootPath + "/images/teams/leagueoflegends/", fileName);
+                        using (var fileStream = new FileStream(path, FileMode.Create))
+                        {
+                            await leagueOfLegends.ImageFile.CopyToAsync(fileStream);
+                        }
+                    }
+
                     _context.Update(leagueOfLegends);
                     await _context.SaveChangesAsync();
                 }

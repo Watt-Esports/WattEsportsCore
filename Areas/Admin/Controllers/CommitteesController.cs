@@ -118,7 +118,7 @@ namespace WattEsportsCore.Areas.Admin.Controllers
             {
                 try
                 {
-                    if(committee.ImageName != null) // We delete it as it's not our default placeholder 
+                    if (committee.ImageName != null) // We delete it as it's not our default placeholder 
                     {
                         //delete image from wwwroot/image
                         var imagePath = Path.Combine(_hostEnvironment.WebRootPath, "/images/committee/", committee.ImageName);
@@ -131,20 +131,20 @@ namespace WattEsportsCore.Areas.Admin.Controllers
                         string fileName = Path.GetFileNameWithoutExtension(committee.ImageFile.FileName);
                         string extension = Path.GetExtension(committee.ImageFile.FileName);
                         committee.ImageName = fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
-                        string path = Path.Combine(wwwRootPath + "/images/committee/", fileName);
+                        string path = Path.Combine(wwwRootPath + "/images/teams/committee/", fileName);
                         using (var fileStream = new FileStream(path, FileMode.Create))
                         {
                             await committee.ImageFile.CopyToAsync(fileStream);
                         }
                     }
-                    else // We are using the default image for the person so we can just save the new one
+                    else if (committee.ImageFile != null) // We are not saving the default image again woo
                     {
                         //Save image to wwwroot/image
                         string wwwRootPath = _hostEnvironment.WebRootPath;
                         string fileName = Path.GetFileNameWithoutExtension(committee.ImageFile.FileName);
                         string extension = Path.GetExtension(committee.ImageFile.FileName);
                         committee.ImageName = fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
-                        string path = Path.Combine(wwwRootPath + "/images/committee/", fileName);
+                        string path = Path.Combine(wwwRootPath + "/images/teams/committee/", fileName);
                         using (var fileStream = new FileStream(path, FileMode.Create))
                         {
                             await committee.ImageFile.CopyToAsync(fileStream);

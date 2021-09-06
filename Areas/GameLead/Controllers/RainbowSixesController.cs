@@ -118,6 +118,19 @@ namespace WattEsportsCore.Areas.GameLead.Controllers
             {
                 return NotFound();
             }
+            
+            rainbowSix.TeamNumberItems = new List<SelectListItem>
+            {
+
+                new SelectListItem {Value = "1", Text = "Team 1"},
+
+                new SelectListItem {Value = "2", Text = "Team 2"},
+
+                new SelectListItem {Value = "3", Text = "Team 3"},
+
+                new SelectListItem {Value = "4", Text = "Team 4"},
+            };
+
             return View(rainbowSix);
         }
 
@@ -126,7 +139,7 @@ namespace WattEsportsCore.Areas.GameLead.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,IGN,Rank,InGameRole,SelectedTeamNumber,ImageName")] RainbowSix rainbowSix)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,IGN,Rank,InGameRole,SelectedTeamNumber,ImageFile")] RainbowSix rainbowSix)
         {
             if (id != rainbowSix.Id)
             {
@@ -137,6 +150,41 @@ namespace WattEsportsCore.Areas.GameLead.Controllers
             {
                 try
                 {
+
+                    if (rainbowSix.ImageName != null) // We delete it as it's not our default placeholder 
+                    {
+                        //delete image from wwwroot/image
+                        var imagePath = Path.Combine(_hostEnvironment.WebRootPath, "/images/rainbowsix/", rainbowSix.ImageName);
+                        if (System.IO.File.Exists(imagePath))
+                            System.IO.File.Delete(imagePath);
+
+
+                        //Save image to wwwroot/image
+                        string wwwRootPath = _hostEnvironment.WebRootPath;
+                        string fileName = Path.GetFileNameWithoutExtension(rainbowSix.ImageFile.FileName);
+                        string extension = Path.GetExtension(rainbowSix.ImageFile.FileName);
+                        rainbowSix.ImageName = fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
+                        string path = Path.Combine(wwwRootPath + "/images/teams/rainbowsix/", fileName);
+                        using (var fileStream = new FileStream(path, FileMode.Create))
+                        {
+                            await rainbowSix.ImageFile.CopyToAsync(fileStream);
+                        }
+                    }
+                    else if (rainbowSix.ImageFile != null) // We are not saving the default image again woo
+                    {
+                        //Save image to wwwroot/image
+                        string wwwRootPath = _hostEnvironment.WebRootPath;
+                        string fileName = Path.GetFileNameWithoutExtension(rainbowSix.ImageFile.FileName);
+                        string extension = Path.GetExtension(rainbowSix.ImageFile.FileName);
+                        rainbowSix.ImageName = fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
+                        string path = Path.Combine(wwwRootPath + "/images/teams/rainbowsix/", fileName);
+                        using (var fileStream = new FileStream(path, FileMode.Create))
+                        {
+                            await rainbowSix.ImageFile.CopyToAsync(fileStream);
+                        }
+                    }
+
+
                     _context.Update(rainbowSix);
                     await _context.SaveChangesAsync();
                 }

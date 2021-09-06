@@ -36,18 +36,6 @@
                     <li class="nav-item active">
                         <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Teams">Competitive Teams</a>
                     </li>
-                    @*<li class="nav-item dropdown">
-            <a class="text-light nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Teams
-            </a>
-            <div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdownMenuLink">
-                <a class="dropdown-item text-light" asp-area="Team" asp-controller="Valorant" asp-action="ValorantTeam">Valorant</a>
-                <a class="dropdown-item text-light" asp-area="Team" asp-controller="CSGO" asp-action="CSGOTeam">CS:GO</a>
-                <a class="dropdown-item text-light" asp-area="Team" asp-controller="LeagueOfLegends" asp-action="LoLTeam">League Of Legends</a>
-                <a class="dropdown-item text-light" asp-area="Team" asp-controller="RainbowSix" asp-action="RainbowSixTeam">Rainbow Six</a>
-                <a class="dropdown-item text-light" asp-area="Team" asp-controller="RocketLeague" asp-action="RocketLeagueTeam">Rocket League</a>
-            </div>
-        </li>*@
 
                     @if (User.IsInRole("ServerManager") || User.IsInRole("CommitteeCoordinator") || User.IsInRole("CommitteeEsports")
                     || User.IsInRole("CommitteePresident") || User.IsInRole("CommitteeSecretary") || User.IsInRole("CommitteeTreasurer"))
@@ -96,11 +84,11 @@
 
 
     <footer class="text-center text-white bgStormgrey mt-auto">
-        <div class="container">
-            Watt Esports 2020, Sponsored by our affiliates; @*The Hive Nightclub and Venue Edinburgh, and*@ Heriot Watt Student Union.
-            @*<a href=https://clubhive.co.uk><img src="/images/logos/hiveWhiteCropped.png" alt="Hive-Logo" width=55></a>*@
-            @*<a href=https://www.hwunion.com><img src="/images/logos/unionPinkCropped.png" alt="HWUnion-Logo" width=55></a>*@
-        </div>
+        @*<div class="container">*@
+            Watt Esports 2021, Sponsored by our affiliates; The Hive Nightclub and Venue Edinburgh, and Heriot Watt Student Union.
+            <a href=https://clubhive.co.uk><img src="/images/logos/hiveWhiteCropped.png" alt="Hive-Logo" width=55></a>
+            <a href=https://www.hwunion.com><img src="/images/logos/unionPinkCropped.png" alt="HWUnion-Logo" width=55></a>
+        @* </div> *@
     </footer>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
