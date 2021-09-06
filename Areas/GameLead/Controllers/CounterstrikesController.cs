@@ -244,8 +244,7 @@ namespace WattEsportsCore.Areas.GameLead.Controllers
                 System.IO.File.Delete(imagePath);
 
 
-            var counterstrike = await _context.Counterstrike.FindAsync(id);
-            _context.Counterstrike.Remove(counterstrike);
+            _context.Counterstrike.Remove(player);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }

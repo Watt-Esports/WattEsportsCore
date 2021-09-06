@@ -227,14 +227,13 @@ namespace WattEsportsCore.Areas.GameLead.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var player = await _context.RainbowSixs.FindAsync(id);
+            var rainbowSix = await _context.RainbowSixs.FindAsync(id);
 
             //delete image from wwwroot/image
-            var imagePath = Path.Combine(_hostEnvironment.WebRootPath, "images/teams/rainbowsix/", player.ImageName);
+            var imagePath = Path.Combine(_hostEnvironment.WebRootPath, "images/teams/rainbowsix/", rainbowSix.ImageName);
             if (System.IO.File.Exists(imagePath))
                 System.IO.File.Delete(imagePath);
 
-            var rainbowSix = await _context.RainbowSixs.FindAsync(id);
             _context.RainbowSixs.Remove(rainbowSix);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));

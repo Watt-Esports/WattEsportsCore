@@ -227,14 +227,13 @@ namespace WattEsportsCore.Areas.GameLead.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var player = await _context.LeagueOfLegends.FindAsync(id);
+            var leagueOfLegends = await _context.LeagueOfLegends.FindAsync(id);
 
             //delete image from wwwroot/image
-            var imagePath = Path.Combine(_hostEnvironment.WebRootPath, "images/teams/leagueoflegends/", player.ImageName);
+            var imagePath = Path.Combine(_hostEnvironment.WebRootPath, "images/teams/leagueoflegends/", leagueOfLegends.ImageName);
             if (System.IO.File.Exists(imagePath))
                 System.IO.File.Delete(imagePath);
 
-            var leagueOfLegends = await _context.LeagueOfLegends.FindAsync(id);
             _context.LeagueOfLegends.Remove(leagueOfLegends);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));

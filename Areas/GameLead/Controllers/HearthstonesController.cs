@@ -229,6 +229,13 @@ namespace WattEsportsCore.Areas.GameLead.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var hearthstone = await _context.Hearthstones.FindAsync(id);
+
+            //delete image from wwwroot/image
+            var imagePath = Path.Combine(_hostEnvironment.WebRootPath, "images/teams/hearthstone/", hearthstone.ImageName);
+            if (System.IO.File.Exists(imagePath))
+                System.IO.File.Delete(imagePath);
+
+
             _context.Hearthstones.Remove(hearthstone);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));

@@ -2,7 +2,6 @@
 using Microsoft.Extensions.Logging;
 using System.Diagnostics;
 using System.Linq;
-using System.Threading.Tasks;
 using WattEsportsCore.Data;
 using WattEsportsCore.Models;
 using WattEsportsCore.Models.ViewModels;
@@ -43,7 +42,7 @@ namespace WattEsportsCore.Controllers
         }
 
 
-        public async Task<IActionResult> AboutAsync()
+        public IActionResult About()
         {
             // Creating a new ProductsViewModel
             CommitteeViewModel model = new CommitteeViewModel

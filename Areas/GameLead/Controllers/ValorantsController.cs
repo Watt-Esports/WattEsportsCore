@@ -225,14 +225,13 @@ namespace WattEsportsCore.Areas.GameLead.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var player = await _context.Valorants.FindAsync(id);
+            var valorant = await _context.Valorants.FindAsync(id);
 
             //delete image from wwwroot/image
-            var imagePath = Path.Combine(_hostEnvironment.WebRootPath, "images/teams/valorant/", player.ImageName);
+            var imagePath = Path.Combine(_hostEnvironment.WebRootPath, "images/teams/valorant/", valorant.ImageName);
             if (System.IO.File.Exists(imagePath))
                 System.IO.File.Delete(imagePath);
 
-            var valorant = await _context.Valorants.FindAsync(id);
             _context.Valorants.Remove(valorant);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));

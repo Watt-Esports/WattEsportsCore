@@ -225,14 +225,13 @@ namespace WattEsportsCore.Areas.GameLead.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var player = await _context.RocketLeagues.FindAsync(id);
+            var rocketLeague = await _context.RocketLeagues.FindAsync(id);
 
             //delete image from wwwroot/image
-            var imagePath = Path.Combine(_hostEnvironment.WebRootPath, "images/teams/rocketleague/", player.ImageName);
+            var imagePath = Path.Combine(_hostEnvironment.WebRootPath, "images/teams/rocketleague/", rocketLeague.ImageName);
             if (System.IO.File.Exists(imagePath))
                 System.IO.File.Delete(imagePath);
 
-            var rocketLeague = await _context.RocketLeagues.FindAsync(id);
             _context.RocketLeagues.Remove(rocketLeague);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
