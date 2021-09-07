@@ -12,3 +12,4 @@ WattEsportsCore.csproj.user
 .vs/*
 WattEsportsCore.sln
 Properties/PublishProfiles/*
+wwwroot/*

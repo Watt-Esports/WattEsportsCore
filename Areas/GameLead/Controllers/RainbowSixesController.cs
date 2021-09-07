@@ -91,7 +91,7 @@ namespace WattEsportsCore.Areas.GameLead.Controllers
                     string fileName = Path.GetFileNameWithoutExtension(rainbowSix.ImageFile.FileName);
                     string extension = Path.GetExtension(rainbowSix.ImageFile.FileName);
                     rainbowSix.ImageName = fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
-                    string path = Path.Combine(wwwRootPath + "/images/teams/rainbowsix/", fileName);
+                    string path = Path.Combine(wwwRootPath + "/images/teams/teams/rainbowsix/", fileName);
                     using (var fileStream = new FileStream(path, FileMode.Create))
                     {
                         await rainbowSix.ImageFile.CopyToAsync(fileStream);
@@ -139,7 +139,7 @@ namespace WattEsportsCore.Areas.GameLead.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,IGN,Rank,InGameRole,SelectedTeamNumber,ImageFile")] RainbowSix rainbowSix)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,IGN,Rank,InGameRole,SelectedTeamNumber,ImageFile,ImageName")] RainbowSix rainbowSix)
         {
             if (id != rainbowSix.Id)
             {
@@ -151,10 +151,10 @@ namespace WattEsportsCore.Areas.GameLead.Controllers
                 try
                 {
 
-                    if (rainbowSix.ImageName != null) // We delete it as it's not our default placeholder 
+                    if (rainbowSix.ImageName != null && rainbowSix.ImageFile != null) // We delete it as it's not our default placeholder 
                     {
                         //delete image from wwwroot/image
-                        var imagePath = Path.Combine(_hostEnvironment.WebRootPath, "/images/rainbowsix/", rainbowSix.ImageName);
+                        var imagePath = Path.Combine(_hostEnvironment.WebRootPath, "/images/teams/rainbowSix/", rainbowSix.ImageName);
                         if (System.IO.File.Exists(imagePath))
                             System.IO.File.Delete(imagePath);
 
@@ -170,7 +170,7 @@ namespace WattEsportsCore.Areas.GameLead.Controllers
                             await rainbowSix.ImageFile.CopyToAsync(fileStream);
                         }
                     }
-                    else if (rainbowSix.ImageFile != null) // We are not saving the default image again woo
+                    else if (rainbowSix.ImageName == null && rainbowSix.ImageFile != null)
                     {
                         //Save image to wwwroot/image
                         string wwwRootPath = _hostEnvironment.WebRootPath;

@@ -91,7 +91,7 @@ namespace WattEsportsCore.Areas.GameLead.Controllers
                     string fileName = Path.GetFileNameWithoutExtension(valorant.ImageFile.FileName);
                     string extension = Path.GetExtension(valorant.ImageFile.FileName);
                     valorant.ImageName = fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
-                    string path = Path.Combine(wwwRootPath + "/images/teams/valorant/", fileName);
+                    string path = Path.Combine(wwwRootPath + "/images/teams/teams/valorant/", fileName);
                     using (var fileStream = new FileStream(path, FileMode.Create))
                     {
                         await valorant.ImageFile.CopyToAsync(fileStream);
@@ -139,7 +139,7 @@ namespace WattEsportsCore.Areas.GameLead.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,IGN,Rank,InGameRole,SelectedTeamNumber,ImageFile")] Valorant valorant)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,IGN,Rank,InGameRole,SelectedTeamNumber,ImageFile,ImageName")] Valorant valorant)
         {
             if (id != valorant.Id)
             {
@@ -150,10 +150,10 @@ namespace WattEsportsCore.Areas.GameLead.Controllers
             {
                 try
                 {
-                    if (valorant.ImageName != null) // We delete it as it's not our default placeholder 
+                    if (valorant.ImageName != null && valorant.ImageFile != null) // We delete it as it's not our default placeholder 
                     {
                         //delete image from wwwroot/image
-                        var imagePath = Path.Combine(_hostEnvironment.WebRootPath, "/images/valorant/", valorant.ImageName);
+                        var imagePath = Path.Combine(_hostEnvironment.WebRootPath, "/images/teams/valorant/", valorant.ImageName);
                         if (System.IO.File.Exists(imagePath))
                             System.IO.File.Delete(imagePath);
 
@@ -169,7 +169,7 @@ namespace WattEsportsCore.Areas.GameLead.Controllers
                             await valorant.ImageFile.CopyToAsync(fileStream);
                         }
                     }
-                    else if (valorant.ImageFile != null) // We are not saving the default image again woo
+                    else if (valorant.ImageName == null && valorant.ImageFile != null)
                     {
                         //Save image to wwwroot/image
                         string wwwRootPath = _hostEnvironment.WebRootPath;

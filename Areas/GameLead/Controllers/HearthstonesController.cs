@@ -87,7 +87,7 @@ namespace WattEsportsCore.Areas.GameLead.Controllers
                         string fileName = Path.GetFileNameWithoutExtension(hearthstone.ImageFile.FileName);
                         string extension = Path.GetExtension(hearthstone.ImageFile.FileName);
                         hearthstone.ImageName = fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
-                        string path = Path.Combine(wwwRootPath + "/images/teams/hearthstone/", fileName);
+                        string path = Path.Combine(wwwRootPath + "/images/teams/teams/hearthstone/", fileName);
                         using (var fileStream = new FileStream(path, FileMode.Create))
                         {
                             await hearthstone.ImageFile.CopyToAsync(fileStream);
@@ -141,7 +141,7 @@ namespace WattEsportsCore.Areas.GameLead.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,IGN,Rank,InGameRole,SelectedTeamNumber,ImageFile")] Hearthstone hearthstone)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,IGN,Rank,InGameRole,SelectedTeamNumber,ImageFile,ImageName")] Hearthstone hearthstone)
         {
             if (id != hearthstone.Id)
             {
@@ -152,10 +152,10 @@ namespace WattEsportsCore.Areas.GameLead.Controllers
             {
                 try
                 {
-                    if (hearthstone.ImageName != null) // We delete it as it's not our default placeholder 
+                    if (hearthstone.ImageName != null && hearthstone.ImageFile != null) // We delete it as it's not our default placeholder 
                     {
                         //delete image from wwwroot/image
-                        var imagePath = Path.Combine(_hostEnvironment.WebRootPath, "/images/hearthstone/", hearthstone.ImageName);
+                        var imagePath = Path.Combine(_hostEnvironment.WebRootPath, "/images/teams/hearthstone/", hearthstone.ImageName);
                         if (System.IO.File.Exists(imagePath))
                             System.IO.File.Delete(imagePath);
 
@@ -171,7 +171,7 @@ namespace WattEsportsCore.Areas.GameLead.Controllers
                             await hearthstone.ImageFile.CopyToAsync(fileStream);
                         }
                     }
-                    else if (hearthstone.ImageFile != null) // We are not saving the default image again woo
+                    else if (hearthstone.ImageName == null && hearthstone.ImageFile != null)
                     {
                         //Save image to wwwroot/image
                         string wwwRootPath = _hostEnvironment.WebRootPath;

@@ -93,7 +93,7 @@ namespace WattEsportsCore.Areas.GameLead.Controllers
                         string fileName = Path.GetFileNameWithoutExtension(counterstrike.ImageFile.FileName);
                         string extension = Path.GetExtension(counterstrike.ImageFile.FileName);
                         counterstrike.ImageName = fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
-                        string path = Path.Combine(wwwRootPath + "/images/teams/counterstrike/", fileName);
+                        string path = Path.Combine(wwwRootPath + "/images/teams/teams/counterstrike/", fileName);
                         using (var fileStream = new FileStream(path, FileMode.Create))
                         {
                             await counterstrike.ImageFile.CopyToAsync(fileStream);
@@ -149,7 +149,7 @@ namespace WattEsportsCore.Areas.GameLead.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,IGN,Rank,InGameRole,SelectedTeamNumber,ImageFile")] Counterstrike counterstrike)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,IGN,Rank,InGameRole,SelectedTeamNumber,ImageFile,ImageName")] Counterstrike counterstrike)
         {
             if (id != counterstrike.Id)
             {
@@ -160,10 +160,10 @@ namespace WattEsportsCore.Areas.GameLead.Controllers
             {
                 try
                 {
-                    if (counterstrike.ImageName != null) // We delete it as it's not our default placeholder 
+                    if (counterstrike.ImageName != null && counterstrike.ImageFile != null) // We delete it as it's not our default placeholder 
                     {
                         //delete image from wwwroot/image
-                        var imagePath = Path.Combine(_hostEnvironment.WebRootPath, "/images/counterstrike/", counterstrike.ImageName);
+                        var imagePath = Path.Combine(_hostEnvironment.WebRootPath, "/images/teams/counterstrike/", counterstrike.ImageName);
                         if (System.IO.File.Exists(imagePath))
                             System.IO.File.Delete(imagePath);
 
@@ -179,7 +179,7 @@ namespace WattEsportsCore.Areas.GameLead.Controllers
                             await counterstrike.ImageFile.CopyToAsync(fileStream);
                         }
                     }
-                    else if (counterstrike.ImageFile != null) // We are not saving the default image again woo
+                    else if (counterstrike.ImageName == null && counterstrike.ImageFile != null)
                     {
                         //Save image to wwwroot/image
                         string wwwRootPath = _hostEnvironment.WebRootPath;

@@ -105,7 +105,7 @@ namespace WattEsportsCore.Areas.Admin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Role,ImageFile")] Committee committee)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Role,ImageFile, ImageName")] Committee committee)
         {
             if (id != committee.Id)
             {
@@ -116,7 +116,8 @@ namespace WattEsportsCore.Areas.Admin.Controllers
             {
                 try
                 {
-                    if (committee.ImageName != null) // We delete it as it's not our default placeholder 
+
+                    if (committee.ImageName != null && committee.ImageFile != null) // We delete it as it's not our default placeholder 
                     {
                         //delete image from wwwroot/image
                         var imagePath = Path.Combine(_hostEnvironment.WebRootPath, "/images/committee/", committee.ImageName);
@@ -129,25 +130,26 @@ namespace WattEsportsCore.Areas.Admin.Controllers
                         string fileName = Path.GetFileNameWithoutExtension(committee.ImageFile.FileName);
                         string extension = Path.GetExtension(committee.ImageFile.FileName);
                         committee.ImageName = fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
-                        string path = Path.Combine(wwwRootPath + "/images/teams/committee/", fileName);
+                        string path = Path.Combine(wwwRootPath + "/images/committee/", fileName);
                         using (var fileStream = new FileStream(path, FileMode.Create))
                         {
                             await committee.ImageFile.CopyToAsync(fileStream);
                         }
                     }
-                    else if (committee.ImageFile != null) // We are not saving the default image again woo
+                    else if (committee.ImageName == null && committee.ImageFile != null)
                     {
                         //Save image to wwwroot/image
                         string wwwRootPath = _hostEnvironment.WebRootPath;
                         string fileName = Path.GetFileNameWithoutExtension(committee.ImageFile.FileName);
                         string extension = Path.GetExtension(committee.ImageFile.FileName);
                         committee.ImageName = fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
-                        string path = Path.Combine(wwwRootPath + "/images/teams/committee/", fileName);
+                        string path = Path.Combine(wwwRootPath + "/images/committee/", fileName);
                         using (var fileStream = new FileStream(path, FileMode.Create))
                         {
                             await committee.ImageFile.CopyToAsync(fileStream);
                         }
-                    }
+                    } 
+     
 
                     _context.Update(committee);
                     await _context.SaveChangesAsync();

@@ -88,7 +88,7 @@ namespace WattEsportsCore.Areas.GameLead.Controllers
                     string fileName = Path.GetFileNameWithoutExtension(rocketLeague.ImageFile.FileName);
                     string extension = Path.GetExtension(rocketLeague.ImageFile.FileName);
                     rocketLeague.ImageName = fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
-                    string path = Path.Combine(wwwRootPath + "/images/teams/rocketleague/", fileName);
+                    string path = Path.Combine(wwwRootPath + "/images/teams/teams/rocketleague/", fileName);
                     using (var fileStream = new FileStream(path, FileMode.Create))
                     {
                         await rocketLeague.ImageFile.CopyToAsync(fileStream);
@@ -137,7 +137,7 @@ namespace WattEsportsCore.Areas.GameLead.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,IGN,Rank,InGameRole,SelectedTeamNumber,ImageFile")] RocketLeague rocketLeague)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,IGN,Rank,InGameRole,SelectedTeamNumber,ImageFile,ImageName")] RocketLeague rocketLeague)
         {
             if (id != rocketLeague.Id)
             {
@@ -149,10 +149,10 @@ namespace WattEsportsCore.Areas.GameLead.Controllers
                 try
                 {
 
-                    if (rocketLeague.ImageName != null) // We delete it as it's not our default placeholder 
+                    if (rocketLeague.ImageName != null && rocketLeague.ImageFile != null) // We delete it as it's not our default placeholder 
                     {
                         //delete image from wwwroot/image
-                        var imagePath = Path.Combine(_hostEnvironment.WebRootPath, "/images/rocketleague/", rocketLeague.ImageName);
+                        var imagePath = Path.Combine(_hostEnvironment.WebRootPath, "/images/teams/rocketLeague/", rocketLeague.ImageName);
                         if (System.IO.File.Exists(imagePath))
                             System.IO.File.Delete(imagePath);
 
@@ -168,7 +168,7 @@ namespace WattEsportsCore.Areas.GameLead.Controllers
                             await rocketLeague.ImageFile.CopyToAsync(fileStream);
                         }
                     }
-                    else if (rocketLeague.ImageFile != null) // We are not saving the default image again woo
+                    else if (rocketLeague.ImageName == null && rocketLeague.ImageFile != null)
                     {
                         //Save image to wwwroot/image
                         string wwwRootPath = _hostEnvironment.WebRootPath;

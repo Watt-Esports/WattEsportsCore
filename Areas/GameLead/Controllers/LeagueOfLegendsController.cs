@@ -91,7 +91,7 @@ namespace WattEsportsCore.Areas.GameLead.Controllers
                     string fileName = Path.GetFileNameWithoutExtension(leagueOfLegends.ImageFile.FileName);
                     string extension = Path.GetExtension(leagueOfLegends.ImageFile.FileName);
                     leagueOfLegends.ImageName = fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
-                    string path = Path.Combine(wwwRootPath + "/images/teams/leagueoflegends/", fileName);
+                    string path = Path.Combine(wwwRootPath + "/images/teams/teams/leagueoflegends/", fileName);
                     using (var fileStream = new FileStream(path, FileMode.Create))
                     {
                         await leagueOfLegends.ImageFile.CopyToAsync(fileStream);
@@ -140,7 +140,7 @@ namespace WattEsportsCore.Areas.GameLead.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,IGN,Rank,InGameRole,SelectedTeamNumber,ImageFile")] LeagueOfLegends leagueOfLegends)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,IGN,Rank,InGameRole,SelectedTeamNumber,ImageFile, ImageName")] LeagueOfLegends leagueOfLegends)
         {
             if (id != leagueOfLegends.Id)
             {
@@ -151,11 +151,10 @@ namespace WattEsportsCore.Areas.GameLead.Controllers
             {
                 try
                 {
-
-                    if (leagueOfLegends.ImageName != null) // We delete it as it's not our default placeholder 
+                    if (leagueOfLegends.ImageName != null && leagueOfLegends.ImageFile != null) // We delete it as it's not our default placeholder 
                     {
                         //delete image from wwwroot/image
-                        var imagePath = Path.Combine(_hostEnvironment.WebRootPath, "/images/leagueoflegends/", leagueOfLegends.ImageName);
+                        var imagePath = Path.Combine(_hostEnvironment.WebRootPath, "/images/teams/leagueOfLegends/", leagueOfLegends.ImageName);
                         if (System.IO.File.Exists(imagePath))
                             System.IO.File.Delete(imagePath);
 
@@ -165,20 +164,20 @@ namespace WattEsportsCore.Areas.GameLead.Controllers
                         string fileName = Path.GetFileNameWithoutExtension(leagueOfLegends.ImageFile.FileName);
                         string extension = Path.GetExtension(leagueOfLegends.ImageFile.FileName);
                         leagueOfLegends.ImageName = fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
-                        string path = Path.Combine(wwwRootPath + "/images/teams/leagueoflegends/", fileName);
+                        string path = Path.Combine(wwwRootPath + "/images/teams/leagueofLegends/", fileName);
                         using (var fileStream = new FileStream(path, FileMode.Create))
                         {
                             await leagueOfLegends.ImageFile.CopyToAsync(fileStream);
                         }
                     }
-                    else if (leagueOfLegends.ImageFile != null) // We are not saving the default image again woo
+                    else if (leagueOfLegends.ImageName == null && leagueOfLegends.ImageFile != null)
                     {
                         //Save image to wwwroot/image
                         string wwwRootPath = _hostEnvironment.WebRootPath;
                         string fileName = Path.GetFileNameWithoutExtension(leagueOfLegends.ImageFile.FileName);
                         string extension = Path.GetExtension(leagueOfLegends.ImageFile.FileName);
                         leagueOfLegends.ImageName = fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
-                        string path = Path.Combine(wwwRootPath + "/images/teams/leagueoflegends/", fileName);
+                        string path = Path.Combine(wwwRootPath + "/images/teams/leagueofLegends/", fileName);
                         using (var fileStream = new FileStream(path, FileMode.Create))
                         {
                             await leagueOfLegends.ImageFile.CopyToAsync(fileStream);
