@@ -229,10 +229,14 @@ namespace WattEsportsCore.Areas.GameLead.Controllers
         {
             var rainbowSix = await _context.RainbowSixs.FindAsync(id);
 
-            //delete image from wwwroot/image
-            var imagePath = Path.Combine(_hostEnvironment.WebRootPath, "images/teams/rainbowsix/", rainbowSix.ImageName);
-            if (System.IO.File.Exists(imagePath))
-                System.IO.File.Delete(imagePath);
+            if (rainbowSix.ImageName != null)
+            {
+                //delete image from wwwroot/image
+                var imagePath = Path.Combine(_hostEnvironment.WebRootPath, "/images/teams/rainbowsix/", rainbowSix.ImageName);
+                if (System.IO.File.Exists(imagePath))
+                    System.IO.File.Delete(imagePath);
+            }
+    
 
             _context.RainbowSixs.Remove(rainbowSix);
             await _context.SaveChangesAsync();

@@ -228,10 +228,13 @@ namespace WattEsportsCore.Areas.GameLead.Controllers
         {
             var leagueOfLegends = await _context.LeagueOfLegends.FindAsync(id);
 
-            //delete image from wwwroot/image
-            var imagePath = Path.Combine(_hostEnvironment.WebRootPath, "images/teams/leagueoflegends/", leagueOfLegends.ImageName);
-            if (System.IO.File.Exists(imagePath))
-                System.IO.File.Delete(imagePath);
+            if (leagueOfLegends.ImageName != null)
+            {
+                //delete image from wwwroot/image
+                var imagePath = Path.Combine(_hostEnvironment.WebRootPath, "/images/teams/leagueoflegends/", leagueOfLegends.ImageName);
+                if (System.IO.File.Exists(imagePath))
+                    System.IO.File.Delete(imagePath);
+            }
 
             _context.LeagueOfLegends.Remove(leagueOfLegends);
             await _context.SaveChangesAsync();

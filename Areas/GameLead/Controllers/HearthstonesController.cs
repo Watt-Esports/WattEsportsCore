@@ -230,10 +230,15 @@ namespace WattEsportsCore.Areas.GameLead.Controllers
         {
             var hearthstone = await _context.Hearthstones.FindAsync(id);
 
-            //delete image from wwwroot/image
-            var imagePath = Path.Combine(_hostEnvironment.WebRootPath, "images/teams/hearthstone/", hearthstone.ImageName);
-            if (System.IO.File.Exists(imagePath))
-                System.IO.File.Delete(imagePath);
+
+            if (hearthstone.ImageName != null)
+            {
+                //delete image from wwwroot/image
+                var imagePath = Path.Combine(_hostEnvironment.WebRootPath, "/images/teams/hearthstone/", hearthstone.ImageName);
+                if (System.IO.File.Exists(imagePath))
+                    System.IO.File.Delete(imagePath);
+            }
+    
 
 
             _context.Hearthstones.Remove(hearthstone);

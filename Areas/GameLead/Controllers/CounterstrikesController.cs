@@ -238,10 +238,14 @@ namespace WattEsportsCore.Areas.GameLead.Controllers
             var player = await _context.Counterstrike.FindAsync(id);
 
 
-            //delete image from wwwroot/image
-            var imagePath = Path.Combine(_hostEnvironment.WebRootPath, "images/teams/counterstrike/", player.ImageName);
-            if (System.IO.File.Exists(imagePath))
-                System.IO.File.Delete(imagePath);
+            if (player.ImageName != null)
+            {
+                //delete image from wwwroot/image
+                var imagePath = Path.Combine(_hostEnvironment.WebRootPath, "/images/teams/counterstrike/", player.ImageName);
+                if (System.IO.File.Exists(imagePath))
+                    System.IO.File.Delete(imagePath);
+            }
+ 
 
 
             _context.Counterstrike.Remove(player);

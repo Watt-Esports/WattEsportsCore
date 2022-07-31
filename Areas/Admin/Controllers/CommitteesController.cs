@@ -195,10 +195,14 @@ namespace WattEsportsCore.Areas.Admin.Controllers
         {
             var committee = await _context.Committees.FindAsync(id);
 
-            //delete image from wwwroot/image
-            var imagePath = Path.Combine(_hostEnvironment.WebRootPath, "images/committee/", committee.ImageName);
-            if (System.IO.File.Exists(imagePath))
-                System.IO.File.Delete(imagePath);
+            if (committee.ImageName != null)
+            {
+                //delete image from wwwroot/image
+                var imagePath = Path.Combine(_hostEnvironment.WebRootPath, "/images/committee/", committee.ImageName);
+                if (System.IO.File.Exists(imagePath))
+                    System.IO.File.Delete(imagePath);
+
+            }
 
             //delete the record
             _context.Committees.Remove(committee);

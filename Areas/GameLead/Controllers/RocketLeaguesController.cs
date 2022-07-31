@@ -227,10 +227,14 @@ namespace WattEsportsCore.Areas.GameLead.Controllers
         {
             var rocketLeague = await _context.RocketLeagues.FindAsync(id);
 
-            //delete image from wwwroot/image
-            var imagePath = Path.Combine(_hostEnvironment.WebRootPath, "images/teams/rocketleague/", rocketLeague.ImageName);
-            if (System.IO.File.Exists(imagePath))
-                System.IO.File.Delete(imagePath);
+            if (rocketLeague.ImageName != null)
+            {
+                //delete image from wwwroot/image
+                var imagePath = Path.Combine(_hostEnvironment.WebRootPath, "/images/teams/rocketleague/", rocketLeague.ImageName);
+                if (System.IO.File.Exists(imagePath))
+                    System.IO.File.Delete(imagePath);
+            }
+   
 
             _context.RocketLeagues.Remove(rocketLeague);
             await _context.SaveChangesAsync();

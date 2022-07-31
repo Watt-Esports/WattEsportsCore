@@ -227,10 +227,14 @@ namespace WattEsportsCore.Areas.GameLead.Controllers
         {
             var valorant = await _context.Valorants.FindAsync(id);
 
-            //delete image from wwwroot/image
-            var imagePath = Path.Combine(_hostEnvironment.WebRootPath, "images/teams/valorant/", valorant.ImageName);
-            if (System.IO.File.Exists(imagePath))
-                System.IO.File.Delete(imagePath);
+            if (valorant.ImageName != null)
+            {
+                //delete image from wwwroot/image
+                var imagePath = Path.Combine(_hostEnvironment.WebRootPath, "/images/teams/valorant/", valorant.ImageName);
+                if (System.IO.File.Exists(imagePath))
+                    System.IO.File.Delete(imagePath);
+            }
+
 
             _context.Valorants.Remove(valorant);
             await _context.SaveChangesAsync();
